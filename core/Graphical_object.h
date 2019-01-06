@@ -13,11 +13,18 @@ protected:
 	Sprite gobject_spr;
 
 public:
+	void set_rotation_angle(float angle);
+	float get_rotation_angle();
+
+	void set_pos(float x, float y);
 	float get_x();
 	float get_y();
+
 	void set_image(string img);
-	void set_pos(float x, float y);
+	string get_image_path();
+
 	Sprite returnSprite();
+
 	Graphical_object();
 	virtual ~Graphical_object();
 };

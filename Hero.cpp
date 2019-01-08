@@ -56,13 +56,11 @@ void Hero::check_stands_on_ground()
 
 					if (c->GetFixtureA()->TestPoint(hero_bottom))
 					{
-						cout << "check" << endl;
 						on_ground = true;
 						break;
 					}
 				}
 				{
-					cout << "fuck" << endl;
 					on_ground = false;
 				}
 			}

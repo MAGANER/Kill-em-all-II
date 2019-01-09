@@ -24,7 +24,7 @@ void Killer_trigger::react(void* obj_type, void* object, b2World* & world)
 			if (intersected || hero_is_under_trigger)
 			{
 				cout << "hero dies" << endl;
-				//static_cast<Hero*>(object).set
+				static_cast<Hero*>(object)->set_health(0);
 			}
 		}
 	}

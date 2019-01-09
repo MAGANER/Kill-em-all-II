@@ -38,13 +38,11 @@ Death_screen::Death_screen(Hero *&hero)
 void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & hero, LevelCounter *& lvl_counter)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Space))
-	{
-		GAME = true;
-		DEATH_SCREEN = false;
+	{	
 		if (lvl_counter->get_level() == 1)
 		{
+			hero->get_body()->SetTransform(b2Vec2(3.0f, 1.0f), 0.0f);
 			hero->set_health(3);
-			hero->get_body()->SetTransform(b2Vec2(100.0f/SCALE, 0.0f), 0.0f);
 		}
 		if (lvl_counter->get_level() == 2
 		|| lvl_counter->get_level() == 3)
@@ -57,6 +55,9 @@ void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & 
 			hero->set_health(3);
 			hero->get_body()->SetTransform(b2Vec2(8.0f, 5.0f), 0.0f);
 		}
+
+		GAME = true;
+		DEATH_SCREEN = false;
 	}
 }
 

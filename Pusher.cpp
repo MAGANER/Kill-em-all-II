@@ -12,7 +12,7 @@ void Pusher::react(void* obj_type, void* object, b2World* & world)
 			{
 				if (pushing_direction == "left")
 				{
-					static_cast<Hero*>(object)->get_body()->ApplyForceToCenter(b2Vec2(-500.0f, 0.0f), true);
+					static_cast<Hero*>(object)->get_body()->ApplyForceToCenter(b2Vec2(-3500.0f, 0.0f), true);
 					
 				}
 				if (pushing_direction == "right")

@@ -42,17 +42,14 @@ void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & 
 		if (lvl_counter->get_level() == 1)
 		{
 			hero->get_body()->SetTransform(b2Vec2(3.0f, 1.0f), 0.0f);
-			hero->set_health(3);
 		}
 		if (lvl_counter->get_level() == 2
 		|| lvl_counter->get_level() == 3)
 		{
-			hero->set_health(3);
 			hero->get_body()->SetTransform(b2Vec2(0.0f, 0.0f), 0.0f);
 		}
 		if (lvl_counter->get_level() == 4)
 		{
-			hero->set_health(3);
 			hero->get_body()->SetTransform(b2Vec2(8.0f, 5.0f), 0.0f);
 		}
 

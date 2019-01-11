@@ -109,12 +109,12 @@ void Monster::move(b2World* & world)
 
 	if (direction == 1)
 	{
-		body->SetLinearVelocity(b2Vec2(-0.6f, 0.0f));
+		body->SetLinearVelocity(b2Vec2(-0.3f, 0.0f));
 		set_animation_rate(1);
 	}
 	if (direction == 2)
 	{
-		body->SetLinearVelocity(b2Vec2(0.6f, 0.0f));
+		body->SetLinearVelocity(b2Vec2(0.3f, 0.0f));
 		set_animation_rate(2);
 	}
 }

@@ -14,7 +14,8 @@ Monster::Monster(float half_radius,
 	detection_radius = 500.0f / SCALE;
 	direction = 1;
 	can_move = true;
-
+	shot = false;
+	timer = new Timer(5.0f);
 }
 void Monster::set_animation_rate(int rate)
 {
@@ -118,7 +119,7 @@ void Monster::move(b2World* & world)
 		}
 	}
 }
-void Monster::search_enemy(b2Vec2& hero_pos)
+void Monster::search_enemy(b2Vec2& hero_pos, vector<Bullet*>& bullets, b2World* & world)
 {
 	bool on_the_same_land = static_cast<int>(body->GetPosition().y) == static_cast<int>(hero_pos.y);
 
@@ -129,8 +130,8 @@ void Monster::search_enemy(b2Vec2& hero_pos)
 
 		if (on_the_same_land && see_target && target_is_righter_me)
 		{
-			cout << "shoot him na hui down!" << endl;
 			can_move = false;
+			shoot(bullets, world);
 		}
 		else {
 			can_move = true;
@@ -142,15 +143,61 @@ void Monster::search_enemy(b2Vec2& hero_pos)
 		bool target_is_lefter = body->GetPosition().x > hero_pos.x;
 		if (on_the_same_land && see_target && target_is_lefter)
 		{
-			cout << "shoot him na hui down!" << endl;
 			can_move = false;
+			shoot(bullets, world);
 		}
 		else {
 			can_move = true;
 		}
 	}
 }
+void Monster::shoot(vector<Bullet*>& bullets, b2World* & world)
+{
+		timer->tic();
+		Time time_to_shoot = seconds(2.5f);
+		if (timer->get_elapsed_time().asSeconds() > time_to_shoot.asSeconds() 
+			&& !shot)
+		{
+			string flying_direction;
+			float x_bullet_pos, y_bullet_pos = get_y() + 30.0f;
+			if (direction == 2)
+			{
+				flying_direction = "right";
+				x_bullet_pos = get_x() + 32.0f;
+
+				// push hero
+				body->ApplyLinearImpulseToCenter(b2Vec2(2.0f, 0.0f), true);
+			}
+			if (direction == 1)
+			{
+				flying_direction = "left";
+				x_bullet_pos = get_x() - 32.0f;
+
+				// push hero
+				body->ApplyLinearImpulseToCenter(b2Vec2(-2.0f, 0.0f), true);
+			}
+
+			Hero_bullet * bullet = new Hero_bullet(5.0f,
+				                                   4.0f,
+				                                   b2_dynamicBody,
+				                                   world,
+				                                   "images/bullet.png",
+				                                   x_bullet_pos,
+				                                   y_bullet_pos,
+				                                   "bullet",
+				                                   flying_direction);
+
+			bullets.push_back(bullet);
+
+			shot = true;
+		}
+		if (static_cast<int>(timer->get_elapsed_time().asSeconds()) == 0)
+		{
+			shot = false;
+		}
+}
 
 Monster::~Monster()
 {
+	delete timer;
 }

@@ -6,6 +6,7 @@ class Monster :
 {
 private:
 	int direction;
+	bool can_move;
 
 	int detection_radius;
 	void set_animation_rate(int rate);
@@ -13,7 +14,7 @@ private:
 public:
 
 	void shoot();
-	void search_enemy();
+	void search_enemy(b2Vec2& hero_pos);
 	
 	void move(b2World* & world);
 

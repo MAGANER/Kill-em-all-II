@@ -1,7 +1,7 @@
 #pragma once
 #include"SFML\System.hpp"
-
 using namespace sf;
+
 class Timer
 {
 private:

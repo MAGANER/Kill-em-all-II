@@ -5,8 +5,6 @@
 class Thorn :
 	public Trigger
 {
-private:
-	Timer * timer;
 public:
 	void react(void* obj_type, void* object, b2World* & world);
 	Thorn(int half_width,

@@ -18,7 +18,10 @@ public:
 	{
 		return level_counter;
 	}
-
+	void set_level(int level_number)
+	{
+		level_counter = level_number;
+	}
 	void load_level()
 	{
 		load_next = true;

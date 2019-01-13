@@ -9,6 +9,9 @@ void Lever::react(void* obj_type, void* object, b2World* & world)
 	{
 		activated = true;
 		set_image("images/lever2.png");
+
+		int access_count = static_cast<Hero*>(object)->get_main_portal_access_counter();
+		static_cast<Hero*>(object)->set_access_to_main_portal(access_count + 1);
 	}
 }
 

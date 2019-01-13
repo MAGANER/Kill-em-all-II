@@ -1,11 +1,11 @@
 #pragma once
 #include "core\Trigger.h"
+#include"Hero.h"
 class Lever :
 	public Trigger
 {
 private:
 	bool activated;
-
 public:
 	void react(void* obj_type, void* object, b2World* & world);
 

@@ -3,16 +3,23 @@
 #include"core/Timer.h"
 #include"core/Bullet.h"
 #include"Hero_bullet.h"
+#include"SFML\Audio.hpp"
 class Monster :
 	public Circle_entity
 {
 private:
+	SoundBuffer  *shoot_buffer, *death_buffer;
+	Sound  *shooting, *death;
+
+
 	int direction;
 	bool can_move;
 
 	bool see_target;
 	bool shot;
 	Timer* timer;
+
+	float32 speed;
 
 	int detection_radius;
 	void set_animation_rate(int rate);
@@ -27,7 +34,7 @@ public:
 	void check_is_shot_down(void* bullet_type, b2World* & world);
 	void die(b2World* & world);
 
-
+	void give_speed(float32 speed);
 
 	Monster(float half_radius,
 		    float32 density,

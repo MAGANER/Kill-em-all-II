@@ -16,6 +16,22 @@ Monster::Monster(float half_radius,
 	can_move = true;
 	shot = false;
 	timer = new Timer(5.0f);
+
+	speed = 0.3f;
+
+
+	shoot_buffer = new SoundBuffer;
+	shoot_buffer->loadFromFile("sounds/shoot.ogg");
+
+	shooting = new Sound;
+	shooting = new Sound(*shoot_buffer);
+
+
+	death_buffer = new SoundBuffer;
+	death_buffer->loadFromFile("sounds/fuck2.ogg");
+
+	death = new Sound;
+	death = new Sound(*death_buffer);
 }
 void Monster::set_animation_rate(int rate)
 {
@@ -46,6 +62,7 @@ void Monster::check_is_shot_down(void* bullet_type, b2World* & world)
 
 			if (x && y && H)
 			{
+				death->play();
 				destroy = true;
 			}
 		}
@@ -109,12 +126,12 @@ void Monster::move(b2World* & world)
 		intersects_border(world);
 		if (direction == 1)
 		{
-			body->SetLinearVelocity(b2Vec2(-0.3f, 0.0f));
+			body->SetLinearVelocity(b2Vec2(-speed, 0.0f));
 			set_animation_rate(1);
 		}
 		if (direction == 2)
 		{
-			body->SetLinearVelocity(b2Vec2(0.3f, 0.0f));
+			body->SetLinearVelocity(b2Vec2(speed, 0.0f));
 			set_animation_rate(2);
 		}
 	}
@@ -184,9 +201,10 @@ void Monster::shoot(vector<Bullet*>& bullets, b2World* & world)
 				                                   "images/bullet.png",
 				                                   x_bullet_pos,
 				                                   y_bullet_pos,
-				                                   "bullet",
+				                                   "monster_bullet",
 				                                   flying_direction);
 
+			shooting->play();
 			bullets.push_back(bullet);
 
 			shot = true;
@@ -197,7 +215,16 @@ void Monster::shoot(vector<Bullet*>& bullets, b2World* & world)
 		}
 }
 
+
+void Monster::give_speed(float32 speed)
+{
+	this->speed = speed;
+}
 Monster::~Monster()
 {
+	//delete shoot_buffer;
+	//delete shooting;
+	////delete death;
+	//delete death_buffer;
 	delete timer;
 }

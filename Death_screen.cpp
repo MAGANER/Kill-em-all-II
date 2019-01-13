@@ -41,18 +41,29 @@ void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & 
 	{	
 		if (lvl_counter->get_level() == 1)
 		{
+			hero->get_body()->SetTransform(b2Vec2(5.0f, 11.0f), 0.0f);
+		}
+		if (lvl_counter->get_level() == 2)
+		{
 			hero->get_body()->SetTransform(b2Vec2(3.0f, 1.0f), 0.0f);
 		}
-		if (lvl_counter->get_level() == 2
-		|| lvl_counter->get_level() == 3)
+		if (lvl_counter->get_level() == 3
+		|| lvl_counter->get_level() == 4)
 		{
 			hero->get_body()->SetTransform(b2Vec2(0.0f, 0.0f), 0.0f);
 		}
-		if (lvl_counter->get_level() == 4)
+		if (lvl_counter->get_level() == 6)
 		{
 			hero->get_body()->SetTransform(b2Vec2(8.0f, 5.0f), 0.0f);
 		}
-
+		if (lvl_counter->get_level() == 7)
+		{
+			hero->get_body()->SetTransform(b2Vec2(12.0f, -2.0f), 0.0f);
+		}
+		if (lvl_counter->get_level() == 8)
+		{
+			hero->get_body()->SetTransform(b2Vec2(12.0f, -2.0f), 0.0f);
+		}
 		GAME = true;
 		DEATH_SCREEN = false;
 	}

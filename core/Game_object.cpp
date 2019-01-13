@@ -19,8 +19,13 @@ string Game_object::get_type()
 	return type;
 }
 
+bool Game_object::should_be_destroyed()
+{
+	return destroy;
+}
 Game_object::Game_object()
 {
+	destroy = false;
 }
 
 

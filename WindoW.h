@@ -5,6 +5,7 @@
 #include"core/Trigger.h"
 #include"core/Bullet.h"
 #include"Monster.h"
+#include"Thorn.h"
 
 class WindoW
 {

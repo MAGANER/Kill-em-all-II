@@ -70,7 +70,7 @@ WindoW::WindoW(int width, int height, string title)
 	size.width = width;
 	this->title = title;
 
-	win.create(size, title);
+	win.create(size, title,Style::Fullscreen);
 }
 
 
@@ -103,8 +103,14 @@ void WindoW::draw(vector<Trigger*> & triggers)
 	for (size_t i = 0; i < triggers.size(); ++i)
 	{
 		if (triggers[i]->get_type() == "lvl_portal"
-		 || triggers[i]->get_type() == "potion"
-		 || triggers[i]->get_type() == "gun")
+			|| triggers[i]->get_type() == "potion"
+			|| triggers[i]->get_type() == "gun"
+			|| triggers[i]->get_type() == "thorn"
+			|| triggers[i]->get_type() == "lever"
+			|| triggers[i]->get_type() == "portal"
+			|| triggers[i]->get_type() == "main_portal"
+			|| triggers[i]->get_type() == "start_portal_new"
+			|| triggers[i]->get_type() == "start_portal_old")
 		{
 			win.draw(triggers[i]->returnSprite());
 		}

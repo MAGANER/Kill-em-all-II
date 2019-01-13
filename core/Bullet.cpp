@@ -15,7 +15,7 @@ Bullet::Bullet(float half_radius,
 	this->flying_direction = flying_direction;
 	collided = false;
 
-	existance_timer = new Timer(3.0f);
+	existance_timer = new Timer(1.0f);
 }
 
 void Bullet::check_time_till_selfdestruction(b2World* & world)
@@ -32,12 +32,12 @@ void Bullet::fly()
 {
 	if (flying_direction == "left")
 	{
-		body->ApplyLinearImpulseToCenter(b2Vec2(-0.8f, 0.2f), true);
+		body->ApplyLinearImpulseToCenter(b2Vec2(-0.8f, -0.1f), true);
 		//body->SetLinearVelocity(b2Vec2(-0.8f, 0.0f));
 	}
 	if (flying_direction == "right")
 	{
-		body->ApplyLinearImpulseToCenter(b2Vec2(0.8f, 0.2f), true);
+		body->ApplyLinearImpulseToCenter(b2Vec2(0.8f, -0.1f), true);
 		//body->SetLinearVelocity(b2Vec2(0.8f, 0.0f));
 	}
 }

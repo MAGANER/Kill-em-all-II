@@ -13,7 +13,9 @@ Gun::Gun(int half_width,
 void Gun::react(void* obj_type, void* object, b2World* & world)
 {
 	check_is_intersected_by(obj_type, world);
-	if (intersected)
+
+	float32 velocity = static_cast<Hero*>(object)->get_body()->GetLinearVelocity().y;
+	if (intersected  && velocity == 0)
 	{
 		int current_ammo = static_cast<Hero*>(object)->get_ammo();
 		static_cast<Hero*>(object)->set_ammo(current_ammo+3);

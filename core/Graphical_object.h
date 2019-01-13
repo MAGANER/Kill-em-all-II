@@ -20,6 +20,8 @@ public:
 	float get_x();
 	float get_y();
 
+	Vector2f get_center();
+
 	void set_image(string img);
 	string get_image_path();
 

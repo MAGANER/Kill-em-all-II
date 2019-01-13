@@ -25,6 +25,14 @@ float Graphical_object::get_y()
 	Vector2f pos = gobject_spr.getPosition();
 	return pos.y;
 }
+Vector2f Graphical_object::get_center()
+{
+	Vector2f center;
+	center.x = (gobject_spr.getTextureRect().width + x_pos)/2;
+	center.y = (gobject_spr.getTextureRect().height + y_pos)/2;
+
+	return center;
+}
 
 Sprite Graphical_object::returnSprite()
 {

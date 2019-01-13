@@ -4,11 +4,15 @@ class Camera
 {
 private:
 	View view;
+
+	int z;
 public:
 	void set_center(float x, float y);
 	void move(string direction);
 	void move(string direction, float speed);
-	void reset(int width, int height);
+	void reset(float width, float height);
+
+	void zoom();
 	View get_view();
 	Camera();
 	~Camera();

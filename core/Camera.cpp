@@ -2,10 +2,17 @@
 
 
 
-
+void Camera::zoom()
+{
+	if (z == 0)
+	{
+		view.zoom(4);
+		z = 2324;
+	}
+}
 void Camera::set_center(float x, float y)
 {
-	view.setCenter(x, y);
+	view.setCenter(x,y);
 }
 
 void Camera::move(string direction)
@@ -46,7 +53,7 @@ void Camera::move(string direction, float speed)
 		view.move(0.0f, speed);
 	}
 }
-void Camera::reset(int width, int height)
+void Camera::reset(float width, float height)
 {
 	view.reset(FloatRect(0.0f, 0.0f, width, height));
 }
@@ -56,7 +63,7 @@ View Camera::get_view()
 }
 Camera::Camera()
 {
-
+	z = 0;
 }
 
 

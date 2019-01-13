@@ -50,8 +50,9 @@ Portal::Portal(int half_width,
 	           b2World* & world,
 	           void* user_data):Trigger(half_width,half_height,density,type,world,user_data)
 {
-	timer = new Timer(0.3f);
+	timer = new Timer(0.4f);
 	current_rate = 1;
+	body->SetActive(true);
 }
 
 

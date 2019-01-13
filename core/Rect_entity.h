@@ -8,25 +8,31 @@ class Rect_entity: public Rect_object, public Game_object
 public:
 	Rect_entity(int half_width,
 		       int half_height,
-		       int density,
+		       float32 density,
 		       b2BodyType type,
 		       b2World* & world,
 		       string image,
 		       float x,
 		       float y);
+
 	Rect_entity(int half_width,
-		int half_height,
-		int density,
-		b2BodyType type,
-		b2World* & world,
-		string image,
-		float x,
-		float y,
-		void* user_data);
+		        int half_height,
+		        float32 density,
+		        b2BodyType type,
+		        b2World* & world,
+		        string image,
+		        float x,
+		        float y,
+		        void* user_data);
+
+	Rect_entity(int half_width,
+		        int half_height,
+		        float32 density,
+		        b2BodyType type,
+		        b2World* & world,
+		        void* user_data);
 
 	virtual ~Rect_entity();
 
-    
-	void update();
 };
 

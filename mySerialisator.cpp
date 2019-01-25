@@ -107,7 +107,8 @@ void mySerialisator::deserialisate(vector<Rect_entity*> & objects,
 				&& type != "portal"
 				&& type != "main_portal"
 				&& type != "start_portal_new"
-				&& type != "start_portal_old")
+				&& type != "start_portal_old"
+				&& type != "start")
 			{
 				// tak == monster
 				cout << type << endl;
@@ -433,6 +434,28 @@ void mySerialisator::deserialisate(vector<Rect_entity*> & objects,
 			if (type == "start_portal_new")
 			{
 				Start_portal * object = new Start_portal(20, 5, 2, b2_staticBody, ph_world, "new");
+				b2Vec2 position;
+				object->set_pos(x, y);
+
+				// we must give give position to body, cos
+				// this constructor creates only physical part
+				// but physical part gets data to set position
+				// from graphical one
+
+				position.x = object->get_x() / SCALE;
+				position.y = object->get_y() / SCALE;
+				object->get_body()->SetTransform(position, rotation);
+				object->set_id(id);
+				object->set_image(image);
+				object->set_type(type);
+				object->set_rotation_angle(rotation);
+				triggers.push_back(object);
+
+				++object_counter;
+			}
+			if (type == "start")
+			{
+				Start * object = new Start(32, 32, 1, b2_staticBody, ph_world, "start");
 				b2Vec2 position;
 				object->set_pos(x, y);
 

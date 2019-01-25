@@ -13,6 +13,7 @@
 #include"Portal.h"
 #include"Main_portal.h"
 #include"Start_portal.h"
+#include"Start.h"
 class mySerialisator :
 	public Serialisator
 {

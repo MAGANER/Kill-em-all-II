@@ -68,6 +68,15 @@ void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & 
 		DEATH_SCREEN = false;
 	}
 }
+void Death_screen::check_pressed_keys(bool & GAME, bool & DEATH_SCREEN, Hero* & hero, LevelCounter *& lvl_counter, b2Vec2 start_position)
+{
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		GAME = true;
+		DEATH_SCREEN = false;
+	}
+}
+
 
 Death_screen::~Death_screen()
 {

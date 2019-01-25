@@ -43,6 +43,17 @@ Game::~Game()
 }
 
 
+b2Vec2 Game::get_spawn_position()
+{
+	for (b2Body * it = world->GetBodyList(); it != 0;it = it->GetNext())
+	{
+		if (it->GetUserData() == "start")
+		{
+			return it->GetPosition();
+		}
+	}
+
+}
 void Game::manage_bullets()
 {
 	for (size_t i = 0; i < bullets.size(); ++i)
@@ -112,27 +123,10 @@ void Game::check_triggers_react()
 				int level = level_counter->get_level();
 				serialisator.deserialisate(plarforms, triggers, background,monsters ,world, "levels/"+to_string(level)+".json", GAME);
 
-				if (level_counter->get_level() != 4)
-				{
-					hero->get_body()->SetTransform(b2Vec2(0.0f, 0.0f), 0.0f);
-				}
-				else if (level_counter->get_level() == 4)
-				{
-					hero->get_body()->SetTransform(b2Vec2(8.0f, 5.0f), 0.0f);
-				}
-				else if (level_counter->get_level() == 5)
-				{
-					hero->get_body()->SetTransform(b2Vec2(9.0f, 7.0f), 0.0f);
-				}
-				else if (level_counter->get_level() == 6)
-				{
-					//doesn't work. why?
-					hero->get_body()->SetTransform(b2Vec2(12.0f, -2.0f), 0.0f);
+				b2Vec2 start_position = get_spawn_position();
+				hero->get_body()->SetTransform(start_position, 0.0f);
 
-					b2Vec2 start_position = b2Vec2(12.0f, -2.0f); // it's needed for teleporting
-					hero->set_start_position(start_position);
 
-				}
 				level_counter->level_is_loaded();
 				
 			}
@@ -193,7 +187,6 @@ void Game::check_triggers_react()
 			}
 
 		}
-
 	}
 }
 void Game::check_pressed_key()
@@ -250,8 +243,8 @@ void Game::run()
 		{
 			//clear world than reload and set start hero parameters
 			clear_world();
-
-			death_screen->check_pressed_keys(GAME, DEATH_SCREEN,hero, level_counter);
+			b2Vec2 start_position = get_spawn_position();
+			death_screen->check_pressed_keys(GAME, DEATH_SCREEN, hero, level_counter,b2Vec2(0.0f,0.0f));
 			if (!DEATH_SCREEN)
 			{
 				delete death_screen;
@@ -274,9 +267,7 @@ void Game::run()
 		
 		check_objects_to_destroy();
 
-
-
-		draw();
+	    draw();
 	}
 }
 void Game::draw()
@@ -359,12 +350,25 @@ void Game::update_world()
 		GAME = false;
 		DEATH_SCREEN = true;
 		death_screen = new Death_screen(hero);
+
+
+		// set position of ressurection
+		for (size_t i = 0; i < triggers.size(); ++i)
+		{
+			if (triggers[i]->get_type() == "start")
+			{
+				cout << "set poi" << endl;
+				triggers[i]->react("hero", hero, world);
+			}
+		}
 	}
 
 
 	if (level_counter->get_level() == 7 && !give_speed)
 	{
-		hero->get_body()->SetTransform(b2Vec2(12.0f, -2.0f), 0.0f);
+		b2Vec2 start_position = get_spawn_position();
+		hero->get_body()->SetTransform(start_position, 0.0f);
+		//hero->get_body()->SetTransform(b2Vec2(12.0f, -2.0f), 0.0f);
 		hero->give_speed(22.0f, 1.0f);
 		world->SetGravity(b2Vec2(0.0f, 9.9f));
 

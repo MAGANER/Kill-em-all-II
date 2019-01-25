@@ -58,6 +58,8 @@ private:
 	void draw();
 
 	void play_music();
+
+	b2Vec2 get_spawn_position();
 private:
 	bool GAME; // if true, than run game
 	bool DEATH_SCREEN; // if true, than game = false, and so show game over screen
